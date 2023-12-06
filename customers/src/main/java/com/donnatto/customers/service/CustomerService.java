@@ -22,33 +22,40 @@ public class CustomerService {
     
     public List<CustomerResponseDTO> getCustomers() {
         return customerRepository.findAllActiveCustomers().stream()
-                .map(CustomerMapper::mapCustomerEntityToCustomerResponseDto)
+                .map(CustomerMapper::mapEntityToDto)
                 .toList();
     }
     
     public CustomerResponseDTO getCustomer(UUID id) {
         return customerRepository.findActiveCustomerById(id)
-                .map(CustomerMapper::mapCustomerEntityToCustomerResponseDto)
+                .map(CustomerMapper::mapEntityToDto)
                 .orElseThrow(CustomerNotFoundException::new);
     }
     
     public CustomerResponseDTO saveCustomer(CustomerRequestDTO requestDTO) {
         Customer customer = new Customer();
         customer.setStatus(CustomerStatus.ACTIVE);
-        CustomerMapper.mapCustomerRequestDtoToCustomerEntity(requestDTO, customer);
+        CustomerMapper.mapDtoToEntity(requestDTO, customer);
         Customer savedCustomer = customerRepository.saveAndFlush(customer);
-        return CustomerMapper.mapCustomerEntityToCustomerResponseDto(savedCustomer);
+        return CustomerMapper.mapEntityToDto(savedCustomer);
+    }
+    
+    public CustomerResponseDTO updateCustomer(UUID id, CustomerRequestDTO requestDTO) {
+        Customer customer = customerRepository.findActiveCustomerById(id).orElseThrow(CustomerNotFoundException::new);
+        CustomerMapper.mapDtoToEntity(requestDTO, customer);
+        Customer updatedCustomer = customerRepository.saveAndFlush(customer);
+        return CustomerMapper.mapEntityToDto(updatedCustomer);
     }
     
     public CustomerResponseDTO patchCustomer(UUID id, PatchCustomerRequestDTO requestDTO) {
-        Customer customer = customerRepository.findById(id).orElseThrow(CustomerNotFoundException::new);
-        CustomerMapper.mapPatchCustomerRequestDtoToCustomerEntity(requestDTO, customer);
+        Customer customer = customerRepository.findActiveCustomerById(id).orElseThrow(CustomerNotFoundException::new);
+        CustomerMapper.mapPatchDtoToEntity(requestDTO, customer);
         Customer updatedCustomer = customerRepository.saveAndFlush(customer);
-        return CustomerMapper.mapCustomerEntityToCustomerResponseDto(updatedCustomer);
+        return CustomerMapper.mapEntityToDto(updatedCustomer);
     }
     
     public void deleteCustomer(UUID id) {
-        Customer customer = customerRepository.findById(id).orElseThrow(CustomerNotFoundException::new);
+        Customer customer = customerRepository.findActiveCustomerById(id).orElseThrow(CustomerNotFoundException::new);
         customer.setStatus(CustomerStatus.INACTIVE);
         customerRepository.save(customer);
     }

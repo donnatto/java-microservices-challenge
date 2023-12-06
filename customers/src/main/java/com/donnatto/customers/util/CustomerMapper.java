@@ -10,7 +10,7 @@ public class CustomerMapper {
     
     private CustomerMapper() {}
     
-    public static void mapCustomerRequestDtoToCustomerEntity(CustomerRequestDTO requestDTO, Customer customer) {
+    public static void mapDtoToEntity(CustomerRequestDTO requestDTO, Customer customer) {
         customer.setName(requestDTO.getName());
         customer.setPassword(requestDTO.getPassword());
         customer.setGender(Gender.valueOf(requestDTO.getGender()));
@@ -20,7 +20,7 @@ public class CustomerMapper {
         customer.setPhone(requestDTO.getPhone());
     }
     
-    public static void mapPatchCustomerRequestDtoToCustomerEntity(
+    public static void mapPatchDtoToEntity(
             PatchCustomerRequestDTO requestDTO, Customer customer) {
         requestDTO.getName().ifPresent(customer::setName);
         requestDTO.getPassword().ifPresent(customer::setPassword);
@@ -31,7 +31,7 @@ public class CustomerMapper {
         requestDTO.getPhone().ifPresent(customer::setPhone);
     }
     
-    public static CustomerResponseDTO mapCustomerEntityToCustomerResponseDto(Customer customer) {
+    public static CustomerResponseDTO mapEntityToDto(Customer customer) {
         return CustomerResponseDTO.builder()
                 .customerId(customer.getCustomerId().toString())
                 .name(customer.getName())

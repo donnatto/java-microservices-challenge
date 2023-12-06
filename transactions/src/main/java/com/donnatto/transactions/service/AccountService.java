@@ -42,6 +42,16 @@ public class AccountService {
         return AccountMapper.mapEntityToDTO(savedAccount);
     }
     
+    public AccountResponseDTO updateAccount(Long id, AccountRequestDTO requestDTO) {
+        Account account = accountRepository.findById(id).orElseThrow(AccountNotFoundException::new);
+        account.setCreationStatus(AccountCreationStatus.ACCOUNT_CREATED);
+        account.setAccountStatus(AccountStatus.PENDING);
+        AccountMapper.mapDtoToEntity(requestDTO, account);
+        Account updatedAccount = accountRepository.saveAndFlush(account);
+        // TODO: send update account event to customer microservice
+        return AccountMapper.mapEntityToDTO(updatedAccount);
+    }
+    
     public AccountResponseDTO patchAccount(Long id, PatchAccountRequestDTO requestDTO) {
         Account account = accountRepository.findById(id).orElseThrow(AccountNotFoundException::new);
         AccountMapper.mapPatchDtoToEntity(requestDTO, account);

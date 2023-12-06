@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -40,8 +41,14 @@ public class CustomerController {
         return service.saveCustomer(requestDTO);
     }
     
-    @PatchMapping("/{customerId}")
+    @PutMapping("/{customerId}")
     public CustomerResponseDTO updateCustomer(
+            @PathVariable String customerId, @Valid @RequestBody CustomerRequestDTO requestDTO) {
+        return service.updateCustomer(UUID.fromString(customerId), requestDTO);
+    }
+    
+    @PatchMapping("/{customerId}")
+    public CustomerResponseDTO patchCustomer(
             @PathVariable String customerId, @RequestBody PatchCustomerRequestDTO requestDTO) {
         return service.patchCustomer(UUID.fromString(customerId), requestDTO);
     }
