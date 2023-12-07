@@ -12,6 +12,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicUpdate;
 
+import java.util.UUID;
+
 @Data
 @Entity(name = "ACCOUNT")
 @AllArgsConstructor
@@ -23,8 +25,8 @@ public class Account {
     private final Long accountId = (long) (Math.random() * 9000000000L) + 1000000000L;
     @Enumerated(EnumType.STRING)
     private AccountType accountType;
-    private String clientId;
-    private String clientName;
+    private UUID customerId;
+    private String customerName;
     private Long initialBalance;
     private Long currentBalance;
     @Enumerated(EnumType.STRING)

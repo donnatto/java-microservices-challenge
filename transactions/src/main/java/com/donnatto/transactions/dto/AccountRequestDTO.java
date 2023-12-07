@@ -11,8 +11,8 @@ public class AccountRequestDTO {
     
     @NotBlank(message = "The account type is required")
     private final String accountType;
-    @NotBlank(message = "The client ID is required")
-    private final String clientId;
+    @NotBlank(message = "The customer ID is required")
+    private final String customerId;
     @NotNull(message = "The initial balance is required")
     private final Long initialBalance;
 }

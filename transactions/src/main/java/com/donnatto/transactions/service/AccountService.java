@@ -7,6 +7,7 @@ import com.donnatto.transactions.dto.AccountStatus;
 import com.donnatto.transactions.dto.PatchAccountRequestDTO;
 import com.donnatto.transactions.entity.Account;
 import com.donnatto.transactions.exceptions.AccountNotFoundException;
+import com.donnatto.transactions.kafka.MessageProducer;
 import com.donnatto.transactions.repository.AccountRepository;
 import com.donnatto.transactions.util.AccountMapper;
 import lombok.AllArgsConstructor;
@@ -19,15 +20,17 @@ import java.util.List;
 public class AccountService {
     
     private final AccountRepository accountRepository;
+    private final MessageProducer messageProducer;
+    private static final String ACCOUNT_EVENT_TOPIC = "account-event-topic";
     
     public List<AccountResponseDTO> getAccounts() {
-        return accountRepository.findAll().stream()
+        return accountRepository.findAllActiveAccounts().stream()
                 .map(AccountMapper::mapEntityToDTO)
                 .toList();
     }
     
     public AccountResponseDTO getAccount(Long id) {
-        return accountRepository.findById(id)
+        return accountRepository.findActiveAccountById(id)
                 .map(AccountMapper::mapEntityToDTO)
                 .orElseThrow(AccountNotFoundException::new);
     }
@@ -38,30 +41,31 @@ public class AccountService {
         account.setAccountStatus(AccountStatus.PENDING);
         AccountMapper.mapDtoToEntity(requestDTO, account);
         Account savedAccount = accountRepository.saveAndFlush(account);
-        // TODO: send create account event to customer microservice
+        messageProducer.sendAccountEvent(ACCOUNT_EVENT_TOPIC, savedAccount);
         return AccountMapper.mapEntityToDTO(savedAccount);
     }
     
     public AccountResponseDTO updateAccount(Long id, AccountRequestDTO requestDTO) {
-        Account account = accountRepository.findById(id).orElseThrow(AccountNotFoundException::new);
+        Account account = accountRepository.findActiveAccountById(id).orElseThrow(AccountNotFoundException::new);
         account.setCreationStatus(AccountCreationStatus.ACCOUNT_CREATED);
         account.setAccountStatus(AccountStatus.PENDING);
         AccountMapper.mapDtoToEntity(requestDTO, account);
         Account updatedAccount = accountRepository.saveAndFlush(account);
-        // TODO: send update account event to customer microservice
+        messageProducer.sendAccountEvent(ACCOUNT_EVENT_TOPIC, updatedAccount);
         return AccountMapper.mapEntityToDTO(updatedAccount);
     }
     
     public AccountResponseDTO patchAccount(Long id, PatchAccountRequestDTO requestDTO) {
-        Account account = accountRepository.findById(id).orElseThrow(AccountNotFoundException::new);
+        Account account = accountRepository.findActiveAccountById(id).orElseThrow(AccountNotFoundException::new);
         AccountMapper.mapPatchDtoToEntity(requestDTO, account);
+        account.setAccountStatus(AccountStatus.PENDING);
         Account updatedAccount = accountRepository.saveAndFlush(account);
-        // TODO: send update account event to customer microservice
+        messageProducer.sendAccountEvent(ACCOUNT_EVENT_TOPIC, updatedAccount);
         return AccountMapper.mapEntityToDTO(updatedAccount);
     }
     
     public void deleteAccount(Long id) {
-        Account account = accountRepository.findById(id).orElseThrow(AccountNotFoundException::new);
+        Account account = accountRepository.findActiveAccountById(id).orElseThrow(AccountNotFoundException::new);
         account.setAccountStatus(AccountStatus.INACTIVE);
         accountRepository.save(account);
     }

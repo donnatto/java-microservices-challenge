@@ -51,7 +51,7 @@ public class TransactionService {
     @Transactional
     public TransactionResponseDTO saveTransaction(TransactionRequestDTO requestDTO) {
         Account account = accountRepository
-                .findById(requestDTO.getAccountId())
+                .findActiveAccountById(requestDTO.getAccountId())
                 .orElseThrow(AccountNotFoundException::new);
         Long initialBalance = account.getCurrentBalance();
         Long transactionAmount = requestDTO.getAmount();

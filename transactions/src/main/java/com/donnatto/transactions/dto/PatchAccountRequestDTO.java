@@ -12,5 +12,5 @@ import java.util.Optional;
 public class PatchAccountRequestDTO {
     
     private Optional<String> accountType;
-    private Optional<String> clientId;
+    private Optional<String> customerId;
 }

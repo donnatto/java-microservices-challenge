@@ -11,8 +11,8 @@ public class AccountResponseDTO {
     
     private final Long accountId;
     private final AccountType accountType;
-    private final String clientId;
-    private final String clientName;
+    private final String customerId;
+    private final String customerName;
     private final Long initialBalance;
     private final Long currentBalance;
     private final AccountCreationStatus creationStatus;
