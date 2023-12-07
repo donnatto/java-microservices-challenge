@@ -1,6 +1,7 @@
 package com.donnatto.customers.exceptions;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Builder;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
@@ -9,6 +10,7 @@ import java.time.LocalDateTime;
 
 @Builder
 @Getter
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ApiError {
     
     private HttpStatus httpStatus;
