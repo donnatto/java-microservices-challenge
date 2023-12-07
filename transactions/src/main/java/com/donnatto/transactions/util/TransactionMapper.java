@@ -1,6 +1,5 @@
 package com.donnatto.transactions.util;
 
-import com.donnatto.transactions.dto.TransactionRequestDTO;
 import com.donnatto.transactions.dto.TransactionResponseDTO;
 import com.donnatto.transactions.entity.Account;
 import com.donnatto.transactions.entity.Transaction;

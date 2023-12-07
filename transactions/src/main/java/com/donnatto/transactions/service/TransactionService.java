@@ -55,7 +55,7 @@ public class TransactionService {
                 .orElseThrow(AccountNotFoundException::new);
         Long initialBalance = account.getCurrentBalance();
         Long transactionAmount = requestDTO.getAmount();
-        OperationType type = requestDTO.getType();
+        OperationType type = OperationType.valueOf(requestDTO.getType());
         if (type == OperationType.DEPOSIT) {
             account.setCurrentBalance(initialBalance + transactionAmount);
         } else if (type == OperationType.WITHDRAWAL) {

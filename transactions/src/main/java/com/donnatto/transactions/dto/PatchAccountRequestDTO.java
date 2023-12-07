@@ -11,6 +11,6 @@ import java.util.Optional;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class PatchAccountRequestDTO {
     
-    private Optional<AccountType> accountType;
+    private Optional<String> accountType;
     private Optional<String> clientId;
 }

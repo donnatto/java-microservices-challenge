@@ -9,8 +9,8 @@ import lombok.Data;
 @AllArgsConstructor
 public class AccountRequestDTO {
     
-    @NotNull(message = "The account type is required")
-    private final AccountType accountType;
+    @NotBlank(message = "The account type is required")
+    private final String accountType;
     @NotBlank(message = "The client ID is required")
     private final String clientId;
     @NotNull(message = "The initial balance is required")

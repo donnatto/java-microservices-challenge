@@ -1,5 +1,6 @@
 package com.donnatto.transactions.dto;
 
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,8 +8,8 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class TransactionRequestDTO {
-    @NotNull(message = "The operation type is required")
-    private OperationType type;
+    @NotBlank(message = "The operation type is required")
+    private String type;
     @NotNull(message = "The operation amount is required")
     private Long amount;
     @NotNull(message = "The account ID is required")
