@@ -11,15 +11,13 @@ import java.util.UUID;
 @Builder
 @Getter
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class TransactionResponseDTO {
+public class TransactionReportDTO {
     
     private final UUID transactionId;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm:ss")
     private final LocalDateTime timestamp;
     private final OperationType operationType;
     private final Long amount;
-    private final Long accountNumber;
-    private final AccountType accountType;
     private final Long initialBalance;
     private final Long finalBalance;
     private final TransactionStatus transactionStatus;

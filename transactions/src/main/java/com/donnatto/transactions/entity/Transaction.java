@@ -33,7 +33,7 @@ public class Transaction {
     private OperationType type;
     private Long amount;
     private Long initialBalance;
-    private Long currentBalance;
+    private Long finalBalance;
     @Enumerated(EnumType.STRING)
     private TransactionStatus transactionStatus;
     @ManyToOne(fetch = FetchType.LAZY, optional = false)

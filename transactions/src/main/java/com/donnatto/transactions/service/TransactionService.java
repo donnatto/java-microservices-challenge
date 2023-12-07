@@ -28,7 +28,7 @@ public class TransactionService {
     private final AccountRepository accountRepository;
     
     public List<TransactionResponseDTO> getTransactions() {
-        return transactionRepository.findAll().stream()
+        return transactionRepository.findAllOrderedByTimestamp().stream()
                 .map(TransactionMapper::mapEntityToDto)
                 .toList();
     }
@@ -70,7 +70,7 @@ public class TransactionService {
         transaction.setAmount(transactionAmount);
         transaction.setAccount(account);
         transaction.setInitialBalance(initialBalance);
-        transaction.setCurrentBalance(account.getCurrentBalance());
+        transaction.setFinalBalance(account.getCurrentBalance());
         transaction.setTransactionStatus(TransactionStatus.COMPLETED);
         Transaction savedTransaction = transactionRepository.save(transaction);
         accountRepository.save(account);
@@ -85,9 +85,14 @@ public class TransactionService {
         Long currentBalance = account.getCurrentBalance();
         Long transactionAmount = transaction.getAmount();
         OperationType type = transaction.getType();
-        account.setCurrentBalance(type == OperationType.DEPOSIT ?
-                currentBalance - transactionAmount :
-                currentBalance + transactionAmount);
+        if (type == OperationType.WITHDRAWAL) {
+            account.setCurrentBalance(currentBalance + transactionAmount);
+        } else if (type == OperationType.DEPOSIT) {
+            if (transactionAmount > currentBalance) {
+                throw new InsufficientBalanceException();
+            }
+            account.setCurrentBalance(currentBalance - transactionAmount);
+        }
         accountRepository.save(account);
         transaction.setTransactionStatus(TransactionStatus.REVERTED);
         transactionRepository.save(transaction);
