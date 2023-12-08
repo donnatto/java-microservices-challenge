@@ -1,6 +1,7 @@
 services:
   customers:
     image: donnatto/customers:0.0.1-SNAPSHOT
+    platform: linux/amd64
     ports:
       - 9001:9001
     networks:
@@ -16,6 +17,7 @@ services:
         
   transactions:
     image: donnatto/transactions:0.0.1-SNAPSHOT
+    platform: linux/amd64
     ports:
       - 9002:9002
     networks:
@@ -70,6 +72,7 @@ services:
       MYSQL_USER: donnatto
       MYSQL_PASSWORD: password
       MYSQL_ROOT_PASSWORD: secret
+      MYSQL_ROOT_HOST: '%'
       
 networks:
   spring:
