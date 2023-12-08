@@ -1,18 +1,22 @@
 package com.donnatto.customers.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Builder
 @Getter
+@AllArgsConstructor
+@NoArgsConstructor
 public class CustomerResponseDTO {
     
-    private final String customerId;
-    private final String name;
-    private final Gender gender;
-    private final int age;
-    private final String dni;
-    private final String address;
-    private final String phone;
-    private final CustomerStatus status;
+    private String customerId;
+    private String name;
+    private Gender gender;
+    private int age;
+    private String dni;
+    private String address;
+    private String phone;
+    private CustomerStatus status;
 }

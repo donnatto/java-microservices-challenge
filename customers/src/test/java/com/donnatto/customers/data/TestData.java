@@ -69,6 +69,18 @@ public class TestData {
         );
     }
     
+    public static CustomerRequestDTO createUpdateRequestDto() {
+        return new CustomerRequestDTO(
+                "87654321",
+                "Maria Ramos",
+                "FEMALE",
+                31,
+                "Flora Tristan 222",
+                "942594919",
+                "another"
+        );
+    }
+    
     public static PatchCustomerRequestDTO createPatchDto() {
         return new PatchCustomerRequestDTO(
                 Optional.empty(),
@@ -79,5 +91,9 @@ public class TestData {
                 Optional.empty(),
                 Optional.empty()
         );
+    }
+    
+    public static String patchJson() {
+        return "{\"address\": \"Jr Paz 394\"}";
     }
 }
