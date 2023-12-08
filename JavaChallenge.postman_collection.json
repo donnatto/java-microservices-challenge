@@ -1,0 +1,474 @@
+{
+	"info": {
+		"_postman_id": "dac4a436-b917-469b-8bba-4fb6b9b3c802",
+		"name": "Java Challenge",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27206948"
+	},
+	"item": [
+		{
+			"name": "customers",
+			"item": [
+				{
+					"name": "createCustomer",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"dni\": \"12345678\",\n    \"name\": \"Juan Perez\",\n    \"gender\": \"MALE\",\n    \"age\": 40,\n    \"address\": \"Rio Parana 101\",\n    \"phone\": \"965895332\",\n    \"password\": \"helloworld\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9001/customers",
+							"host": [
+								"localhost"
+							],
+							"port": "9001",
+							"path": [
+								"customers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getCustomers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:9001/customers",
+							"host": [
+								"localhost"
+							],
+							"port": "9001",
+							"path": [
+								"customers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getCustomer",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:9001/customers/c931fd24-0fd2-46be-be9b-45087e13af75",
+							"host": [
+								"localhost"
+							],
+							"port": "9001",
+							"path": [
+								"customers",
+								"c931fd24-0fd2-46be-be9b-45087e13af75"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateCustomer",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"dni\": \"12345238\",\n    \"name\": \"Cris Soto\",\n    \"gender\": \"FEMALE\",\n    \"age\": 20,\n    \"address\": \"Rio Parana 323\",\n    \"phone\": \"999895332\",\n    \"password\": \"tommy\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9001/customers/07688ca6-35f2-4898-9ec5-107b17c8c863",
+							"host": [
+								"localhost"
+							],
+							"port": "9001",
+							"path": [
+								"customers",
+								"07688ca6-35f2-4898-9ec5-107b17c8c863"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "patchCustomer",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"gender\": \"MALE\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9001/customers/07688ca6-35f2-4898-9ec5-107b17c8c863",
+							"host": [
+								"localhost"
+							],
+							"port": "9001",
+							"path": [
+								"customers",
+								"07688ca6-35f2-4898-9ec5-107b17c8c863"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteCustomer",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:9001/customers/c931fd24-0fd2-46be-be9b-45087e13af75",
+							"host": [
+								"localhost"
+							],
+							"port": "9001",
+							"path": [
+								"customers",
+								"c931fd24-0fd2-46be-be9b-45087e13af75"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "accounts",
+			"item": [
+				{
+					"name": "createAccount",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"accountType\": \"CHECKING_ACCOUNT\",\n    \"customerId\": \"9c5ab5a0-5fba-42c0-9548-e1306dc466f4\",\n    \"initialBalance\": 2000\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9002/accounts",
+							"host": [
+								"localhost"
+							],
+							"port": "9002",
+							"path": [
+								"accounts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAccounts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:9002/accounts",
+							"host": [
+								"localhost"
+							],
+							"port": "9002",
+							"path": [
+								"accounts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAccount",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:9002/accounts/1766281415",
+							"host": [
+								"localhost"
+							],
+							"port": "9002",
+							"path": [
+								"accounts",
+								"1766281415"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateAccount",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"accountType\": \"CHECKING_ACCOUNT\",\n    \"customerId\": \"178331\",\n    \"initialBalance\": 4000\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9002/accounts/2578754409",
+							"host": [
+								"localhost"
+							],
+							"port": "9002",
+							"path": [
+								"accounts",
+								"2578754409"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "patchAccount",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"accountType\": \"CHECKING_ACCOUNT\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9002/accounts/1766281415",
+							"host": [
+								"localhost"
+							],
+							"port": "9002",
+							"path": [
+								"accounts",
+								"1766281415"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteAccount",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:9002/accounts/5436687569",
+							"host": [
+								"localhost"
+							],
+							"port": "9002",
+							"path": [
+								"accounts",
+								"5436687569"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "transactions",
+			"item": [
+				{
+					"name": "createTransactionWithdrawal",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"type\": \"WITHDRAWAL\",\n    \"amount\": 5000,\n    \"accountId\": 7826747004\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9002/transactions",
+							"host": [
+								"localhost"
+							],
+							"port": "9002",
+							"path": [
+								"transactions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createTransactionDeposit",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"type\": \"DEPOSIT\",\n    \"amount\": 5000,\n    \"accountId\": 7826747004\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9002/transactions",
+							"host": [
+								"localhost"
+							],
+							"port": "9002",
+							"path": [
+								"transactions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAccountTransactions",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:9002/transactions?accountId=5436687569",
+							"host": [
+								"localhost"
+							],
+							"port": "9002",
+							"path": [
+								"transactions"
+							],
+							"query": [
+								{
+									"key": "accountId",
+									"value": "5436687569"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getTransactions",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:9002/transactions",
+							"host": [
+								"localhost"
+							],
+							"port": "9002",
+							"path": [
+								"transactions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getTransaction",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:9002/transactions/5eecca87-b9ad-4ba4-866f-1ca81b0a546f",
+							"host": [
+								"localhost"
+							],
+							"port": "9002",
+							"path": [
+								"transactions",
+								"5eecca87-b9ad-4ba4-866f-1ca81b0a546f"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "revertTransaction",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:9002/transactions/9d6838c5-1747-4be0-aac7-df64c14931a2",
+							"host": [
+								"localhost"
+							],
+							"port": "9002",
+							"path": [
+								"transactions",
+								"9d6838c5-1747-4be0-aac7-df64c14931a2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "reports",
+			"item": [
+				{
+					"name": "getAccountStatus",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:9002/reports?customerId=9c5ab5a0-5fba-42c0-9548-e1306dc466f4&from=05-12-2023&to=08-12-2023",
+							"host": [
+								"localhost"
+							],
+							"port": "9002",
+							"path": [
+								"reports"
+							],
+							"query": [
+								{
+									"key": "customerId",
+									"value": "9c5ab5a0-5fba-42c0-9548-e1306dc466f4"
+								},
+								{
+									"key": "from",
+									"value": "05-12-2023"
+								},
+								{
+									"key": "to",
+									"value": "08-12-2023"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
